@@ -31,10 +31,10 @@ public class Game {
     /**
      * Инициализация игрового поля.
      */
-    public void initMap(){
-        fieldSizeX = 3;
-        fieldSizeY = 3;
-        winCount = 3;
+    public void initMap(int sizeX, int sizeY, int winCount){
+        fieldSizeX = sizeX;
+        fieldSizeY = sizeY;
+        this.winCount = winCount;
         field = new int[fieldSizeX][fieldSizeY];
         for(int i = 0; i < fieldSizeX; i++){
             for (int j = 0; j < fieldSizeY; j++) {

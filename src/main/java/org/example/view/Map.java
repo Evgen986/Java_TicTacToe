@@ -111,10 +111,10 @@ public class Map extends JPanel {
      * @param wLen количество повторений для победы.
      */
     void startNewGame(int mode, int fSzX, int fSzY, int wLen){
-        System.out.printf("Mode: %d;\nSize: x=%d, y=%d;\nLength: %d",
+        System.out.printf("Mode: %d;\nSize: x=%d, y=%d;\nLength: %d\n",
                 mode, fSzX, fSzY, wLen);
         // Инициализируем игровое поле
-        game.initMap();
+        game.initMap(fSzX,fSzY,wLen); // TODO временная инициализация, заменить параметры метода
         game.setGameOver(false);
         game.setInitialized(true);
         // Принудительно заставляем Swing перерисовать игровое поле.
@@ -138,16 +138,16 @@ public class Map extends JPanel {
         // Получаем высоту окна
         panelHeight = getHeight();
         // Определяем высоту ячейки
-        cellHeight = panelHeight / 3;
+        cellHeight = panelHeight / game.getFieldSizeY();
         // Определяем ширину ячейки
-        cellWidth = panelWidth / 3;
+        cellWidth = panelWidth / game.getFieldSizeX();
 
         // Задаем цвет линии
         g.setColor(Color.BLACK);
 
         // Рисуем сетку поля для игры
         // Горизонтальные линии. Перебираем в цикле кол-во горизонтальных линии.
-        for (int h = 0; h < 3; h++) {
+        for (int h = 0; h < game.getFieldSizeY(); h++) {
             // Получаем координату на каком удалении от 0 точки по оси Y рисовать линию
             int y = h * cellHeight;
             /*  Рисуем линию от
@@ -161,7 +161,7 @@ public class Map extends JPanel {
             g.drawLine(0, y, panelWidth, y);
         }
         // Вертикальные линии.
-        for (int w = 0; w < 3; w++) {
+        for (int w = 0; w < game.getFieldSizeX(); w++) {
             int x = w * cellWidth;
             g.drawLine(x, 0, x, panelHeight);
         }
